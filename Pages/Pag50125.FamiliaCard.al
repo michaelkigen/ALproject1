@@ -44,5 +44,14 @@ page 50125 "Familia Card"
                 }
             }
         }
+        area(FactBoxes)
+        {
+            part(familia;"familia card part")
+            {
+                ApplicationArea=all;
+                SubPageLink =id =field(id);
+            }
+        }
     }
+
 }

@@ -4,7 +4,7 @@ page 50122 "Crop List Part"
     Caption = 'Crop List Part';
     PageType = ListPart;
     SourceTable = Crops;
-    
+
     layout
     {
         area(Content)
@@ -23,14 +23,42 @@ page 50122 "Crop List Part"
         area(Processing)
         {
             action(upload)
-            { 
-                Caption= 'Upload';
+            {
+                Caption = 'Upload';
                 Image = Import;
                 trigger OnAction()
                 var
-                CropProfile: Codeunit "Crop Profile ";
+                    CropProfile: Codeunit "Crop Profile ";
                 begin
-                  CropProfile.CropMedia(Rec);  
+                    CropProfile.CropMedia(Rec);
+                end;
+            }
+            action(Download)
+            {
+                ApplicationArea = All;
+                Caption = 'Download';
+                Image = Export;
+
+                trigger OnAction()
+                var
+                    TempBlob: Codeunit "Temp Blob";
+                    FileName: Text;
+                    outsrm: OutStream;
+                    instrm: InStream;
+                begin
+                    Rec.TestField(Name);
+                    if Rec.Profile.HasValue then
+                        if not Confirm('Download? ') then
+                            exit;
+                    TempBlob.CreateOutStream(outsrm);
+                    Rec.Profile.ExportStream(outsrm);
+                    TempBlob.CreateInStream(instrm);
+                    FileName := 'PROFILE.JPEG';
+
+                    if DownloadFromStream(instrm, 'Download', '', 'ALL FILES (*.*)|*.*', FileName) then
+                        Message('Downloading')
+                    else
+                        Error('an error occured while downloading , please try again');
                 end;
             }
         }

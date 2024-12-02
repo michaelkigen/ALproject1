@@ -23,6 +23,14 @@ page 50107 "Chemelet Card"
 
                     NotBlank = true;
                 }
+                field(email;Rec.email)
+                {
+                    
+                }
+                field(Phone;Rec.Phone)
+                {
+                    
+                }
                 field(Age; Rec.Age)
                 {
                     ToolTip = 'Specifies the value of the Age field.', Comment = '%';
@@ -50,6 +58,31 @@ page 50107 "Chemelet Card"
             {
                 ApplicationArea = all;
             }
+        }
+    }
+    actions
+    {
+        area(Processing)
+        {
+           action(PV)
+            {
+                ApplicationArea = All;
+                Caption = 'PV', comment = 'NLB="YourLanguageCaption"';
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedIsBig = true;
+
+
+                trigger OnAction()
+                var
+                    processsing: Codeunit "API processing";
+                begin
+                    
+                    if Confirm('Do you want to verify the phnoe nubmer? ', true) then
+                        Message('confirming...');
+                    processsing.PhoneNumberChacker(Rec);
+                end;
+            } 
         }
     }
 }

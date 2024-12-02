@@ -20,6 +20,14 @@ page 50106 "Chemelet List"
                 {
                     ToolTip = 'Specifies the value of the Name field.', Comment = '%';
                 }
+                field(email; Rec.email)
+                {
+
+                }
+                field(Phone; Rec.Phone)
+                {
+
+                }
                 field(Age; Rec.Age)
                 {
                     ToolTip = 'Specifies the value of the Age field.', Comment = '%';
@@ -30,7 +38,7 @@ page 50106 "Chemelet List"
                 }
             }
         }
-        
+
 
     }
     actions
@@ -59,6 +67,7 @@ page 50106 "Chemelet List"
                     Opps.GetLenox();
                 end;
             }
+            
         }
     }
 }

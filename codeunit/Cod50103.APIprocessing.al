@@ -21,12 +21,31 @@ codeunit 50103 "API processing"
         ApiConnect.Name := jsonTkn.AsValue().AsText();
         APIjsonObj.Get('Description', jsonTkn);
         ApiConnect.Description := jsonTkn.AsValue().AsText();
-        
-
-        end;
 
 
+    end;
 
-  
-    
+
+
+    [IntegrationEvent(true, false)]
+    procedure PhoneNumberChacker(var family: Record "Chemelet Family")
+
+    begin
+
+    end;
+
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"API processing", 'PhoneNumberChacker', '', false, false)]
+    local procedure ValidatePhoneNo(var family: Record "Chemelet Family")
+    var
+        Regex: Codeunit Regex;
+        ismatch: Boolean;
+        pattern: code[100];
+        errmsg: Label '%1 is not a valid email';
+    begin
+        pattern := '^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$';
+        ismatch := Regex.IsMatch(family.email, pattern);
+
+        if not ismatch then
+            Error(StrSubstNo(errmsg, family.email));
+    end;
 }

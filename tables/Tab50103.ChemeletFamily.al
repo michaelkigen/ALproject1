@@ -6,18 +6,45 @@ table 50103 "Chemelet Family"
     fields
     {
 
-        field(1; Id; Code[50])
+        field(10; Id; Code[50])
         {
             Caption = 'Id';
             Editable = false;
 
         }
-        field(2; Name; Text[50])
+        field(20; Name; Text[50])
         {
             Caption = 'Name';
 
         }
-        field(3; Age; Integer)
+        field(21; email; Code[50])
+        {
+            Caption = 'Email';
+
+        //     trigger OnValidate()
+        //     var
+
+        //         Regex: Codeunit Regex;
+        //         IsMatch: Boolean;
+        //         pattern: Text[100];
+        //         ErrorMessage: Label 'The email %1 entered is not a valid email address.';
+        //     begin
+        //         pattern := '^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$';
+        //         IsMatch := Regex.IsMatch(Email, pattern);
+
+        //         if not IsMatch then
+        //             Error(StrSubstNo(ErrorMessage, Email));
+
+        //     end;
+
+        }
+        field(22; Phone; Code[50])
+        {
+            Caption = 'phone no.';
+
+        }
+        
+        field(30; Age; Integer)
         {
             Caption = 'Age';
             trigger OnValidate()
@@ -28,21 +55,21 @@ table 50103 "Chemelet Family"
                 Rec.Modify(true)
             end;
         }
-        field(4; Gender; enum Gander)
+        field(40; Gender; enum Gander)
         {
             Caption = 'Gender';
         }
-        field(5; "Serial No"; Code[50])
+        field(50; "Serial No"; Code[50])
         {
             Caption = 'Serial No';
             TableRelation = "No. series";
         }
-        field(6; State; Text[50])
+        field(60; State; Text[50])
         {
             DataClassification = ToBeClassified;
             Editable = false;
         }
-        field(7; Picture; Media)
+        field(70; Picture; Media)
         {
             DataClassification = ToBeClassified;
         }

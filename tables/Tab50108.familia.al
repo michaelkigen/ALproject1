@@ -30,6 +30,11 @@ table 50108 familia
         {
             Caption = 'gender';
         }
+        
+        field(80; pictures; MediaSet)
+        {
+            Caption = 'profile picture';
+        }
         field(60; indent; Integer)
         {
             Caption = 'indent';
